@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
+use App\Http\Controllers\TareasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,13 @@ Route::get('/test', function () {
         'timestamp' => now()
     ]);
 });
+
+// Rutas para tareas
+Route::post("/crear-tarea", [TareasController::class, "crearTarea"]);
+Route::get("/tareas", [TareasController::class, "listarTareas"]);
+Route::get("/tareas/{id}", [TareasController::class, "obtenerTarea"]);
+Route::put("/tareas/{id}", [TareasController::class, "actualizarTarea"]);
+Route::delete("/tareas/{id}", [TareasController::class, "eliminarTarea"]);
 
 // Rutas para tareas usando el controlador
 Route::apiResource('todos', TodoController::class);
