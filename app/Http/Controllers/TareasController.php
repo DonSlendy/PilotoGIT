@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TareasModel;
+use App\Services\GeminiService;
 use Illuminate\Support\Facades\Log;
 
 class TareasController extends Controller
@@ -71,5 +72,20 @@ class TareasController extends Controller
 
         $tarea->delete();
         return response()->json(['message' => 'Tarea eliminada exitosamente']);
+    }
+
+    public function recibirIngredientes(Request $request)
+    {
+        $ingredientes = $request->validate([
+            "ingredientes" => "required|array",
+        ]);
+
+        $geminiService = new GeminiService();
+        $gemini = new GeminiController($geminiService);
+
+        // Pasar solo el array de ingredientes, no todo el objeto validado
+        $result = $gemini->ask($ingredientes['ingredientes']);
+
+        return response()->json($result);
     }
 }

@@ -4,17 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\TareasController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\GeminiController;
 
 // Ruta de usuario (requiere autenticación - comentada temporalmente)
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -37,5 +27,5 @@ Route::get("/tareas/{id}", [TareasController::class, "obtenerTarea"]);
 Route::put("/tareas/{id}", [TareasController::class, "actualizarTarea"]);
 Route::delete("/tareas/{id}", [TareasController::class, "eliminarTarea"]);
 
-// Rutas para tareas usando el controlador
-Route::apiResource('todos', TodoController::class);
+//Route::post('/gemini/ask', [GeminiController::class, 'ask']);
+Route::post('/recibir-ingredientes', [TareasController::class, 'recibirIngredientes']);
