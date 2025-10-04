@@ -29,3 +29,4 @@ Route::delete("/tareas/{id}", [TareasController::class, "eliminarTarea"]);
 
 //Route::post('/gemini/ask', [GeminiController::class, 'ask']);
 Route::post('/recibir-ingredientes', [TareasController::class, 'recibirIngredientes']);
+Route::post('/crear-receta', [GeminiController::class, 'crearReceta']);

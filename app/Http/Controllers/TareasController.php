@@ -86,6 +86,10 @@ class TareasController extends Controller
         // Pasar solo el array de ingredientes, no todo el objeto validado
         $result = $gemini->ask($ingredientes['ingredientes']);
 
-        return response()->json($result);
+        if ($result->original == "NO\n") {
+            return response()->json(['message' => 'No se encontraron recetas para los ingredientes proporcionados'], 404);
+        } else {
+            return response()->json($result);
+        }
     }
 }
